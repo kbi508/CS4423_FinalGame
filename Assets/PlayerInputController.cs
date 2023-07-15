@@ -25,6 +25,7 @@ public class PlayerInputController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             creature.LaunchProjectile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            GetComponent<AudioSource>().Play();
             //creature.LaunchProjectile(transform.up);
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeployAsteroids : MonoBehaviour
 {
     public GameObject asteroidPrefab;
-    public float respawnTime = 1f;
+    public float respawnTime = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class DeployAsteroids : MonoBehaviour
     private void spawnAsteroid()
     {
         GameObject a = Instantiate(asteroidPrefab) as GameObject;
-        a.transform.position = new Vector2(Random.RandomRange(-6, 4),3);
+        a.transform.position = new Vector2(Random.RandomRange(-6, 4),7);
         Destroy(a, 10);
     }
     IEnumerator asteroidWave()

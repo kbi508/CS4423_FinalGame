@@ -5,7 +5,7 @@ using UnityEngine;
 public class deployCoins : MonoBehaviour
 {
     public GameObject coinPrefab;
-    public float respawnTime = 1f;
+    public float respawnTime = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +15,7 @@ public class deployCoins : MonoBehaviour
     private void spawnCoin()
     {
         GameObject a = Instantiate(coinPrefab) as GameObject;
-        a.transform.position = new Vector2(Random.RandomRange(-5, 6), 6);
+        a.transform.position = new Vector2(Random.Range(-5, 6), Random.Range(1, 4));
         Destroy(a, 10);
     }
     IEnumerator coinWave()
@@ -23,7 +23,7 @@ public class deployCoins : MonoBehaviour
         while (true)
         {
             spawnCoin();
-            yield return new WaitForSeconds(respawnTime);
+            yield return new WaitForSeconds(15);
         }
         yield return null;
     }

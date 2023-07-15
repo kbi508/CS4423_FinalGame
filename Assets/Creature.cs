@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Creature : MonoBehaviour
 {
-    public int healthPoint = 10;
+    public int healthPoint = 5;
     public float speed = 3.0f;
     public float rotationSpeed = 5f;
     public string creatureName = "Dudeman";
@@ -18,7 +19,7 @@ public class Creature : MonoBehaviour
     SpriteRenderer sr;
     Rigidbody2D rb;
 
- 
+
     //always called before Start();
     void Awake()
     {
@@ -27,19 +28,19 @@ public class Creature : MonoBehaviour
         //myTransform = GetComponent<Transform>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        
 
-        
-       
+
+
+
     }
-    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Start called");
-        GameController gc = GameController.gameController;  
+        GameController gc = GameController.gameController;
 
     }
 
@@ -74,8 +75,8 @@ public class Creature : MonoBehaviour
 
     public void RandomizeColor()
     {
-        sr.color = new Color(Random.Range(0f,1f),Random.Range(0f,1f),Random.Range(0f,1f));
-        
+        sr.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
     }
 
 
@@ -85,5 +86,17 @@ public class Creature : MonoBehaviour
 
         newProjectile.GetComponent<Projectile>().Launch(position);
     }
-
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<asteroid>() != null)
+        {
+            healthPoint = healthPoint - 1;
+            if (healthPoint <= 0)
+            {
+                //Destroy(this.gameObject);
+                SceneManager.LoadScene("MainMenu");
+                
+            }
+        }
+    }
 }

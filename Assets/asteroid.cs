@@ -31,6 +31,7 @@ public class asteroid : MonoBehaviour
             if (healthPoint <= 0)
             {
                 Destroy(this.gameObject);
+                ScoreManager.instance.AddPoint();
             }
         }
 

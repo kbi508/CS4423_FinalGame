@@ -37,13 +37,13 @@ public class PlayerInputController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         { 
-            horizontalInput = -100f;
+            horizontalInput = -110f;
             Debug.Log("D Pressed");
         }
         else if (Input.GetKey(KeyCode.A))
         {
             
-            horizontalInput = 100f;
+            horizontalInput = 110f;
             Debug.Log("A Pressed");
         }
         else if (Input.GetKey(KeyCode.W))

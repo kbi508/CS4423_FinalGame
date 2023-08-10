@@ -8,6 +8,8 @@ public class asteroid : MonoBehaviour
 {
     public int healthPoint = 5;
 
+    public AudioClip explosion;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +33,7 @@ public class asteroid : MonoBehaviour
             if (healthPoint <= 0)
             {
                 Destroy(this.gameObject);
+                SFXHandler.singleton.PlaySound(explosion);
                 ScoreManager.instance.AddPoint();
             }
         }

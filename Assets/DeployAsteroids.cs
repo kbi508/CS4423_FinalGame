@@ -7,6 +7,8 @@ public class DeployAsteroids : MonoBehaviour
     public GameObject asteroidPrefab;
     public float respawnTime = 10f;
 
+
+
     // Start is called before the first frame update
     void Start()
     {

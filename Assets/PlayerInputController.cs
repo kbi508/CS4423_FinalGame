@@ -6,8 +6,9 @@ public class PlayerInputController : MonoBehaviour
 {
 
     Creature creature;
-    
-    
+    public AudioClip blasterSound;
+
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,10 +23,10 @@ public class PlayerInputController : MonoBehaviour
             creature.RandomizeColor();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             creature.LaunchProjectile(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            GetComponent<AudioSource>().Play();
+            SFXHandler.singleton.PlaySound(blasterSound);
             //creature.LaunchProjectile(transform.up);
         }
 

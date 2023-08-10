@@ -10,6 +10,12 @@ public class Creature : MonoBehaviour
     public float rotationSpeed = 5f;
     public string creatureName = "Dudeman";
 
+    public AudioClip hurtSound;
+
+    public AudioClip increaseHealth;
+
+
+
     //Transform myTransform;
 
     [Header("Projectiles")]
@@ -48,6 +54,8 @@ public class Creature : MonoBehaviour
     void Update()
     {
         Debug.Log("Update called");
+        HealthManager.instance.ChangeHealth(healthPoint);
+
         //transform.position += new Vector3(1f, 0f, 0f) * Time.deltaTime;
         //sr.color = Color.red;
     }
@@ -78,6 +86,7 @@ public class Creature : MonoBehaviour
         sr.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
     }
+    
 
 
     public void LaunchProjectile(Vector3 position)
@@ -86,17 +95,37 @@ public class Creature : MonoBehaviour
 
         newProjectile.GetComponent<Projectile>().Launch(position);
     }
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.GetComponent<asteroid>() != null)
         {
             healthPoint = healthPoint - 1;
+
+            SFXHandler.singleton.PlaySound(hurtSound);
+
+            //GetComponent<DiscreteBar>().SetValue(healthPoint);
             if (healthPoint <= 0)
             {
-                //Destroy(this.gameObject);
-                SceneManager.LoadScene("MainMenu");
+                Destroy(this.gameObject);
+                SceneManager.LoadScene("EndScreen");
                 
             }
+        }
+        
+        if (other.tag =="Coin")
+        {
+            other.GetComponent<Coin>().PlaySound();
+            Destroy(other.gameObject);
+        
+        }
+        if (other.tag == "Health")
+        {
+            healthPoint = healthPoint + 1;
+            SFXHandler.singleton.PlaySound(increaseHealth);
+            Destroy(other.gameObject);
+
         }
     }
 }

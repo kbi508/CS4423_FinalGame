@@ -7,20 +7,23 @@ public class Coin : MonoBehaviour
 {
    
     GameController gc = GameController.gameController;
- 
 
-    void Awake()
+    public AudioClip audioClip;
+
+
+    public void PlaySound()
     {
-        
+        SFXHandler.singleton.PlaySound(audioClip);
     }
+   
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Collision occured");
 
         if (other.GetComponent<Creature>() != null)
         {
-            GetComponent<AudioSource>().Play();
-            Destroy(this.gameObject);
+            
+            //Destroy(this.gameObject);
             ScoreManager.instance.AddPoint();
 
         }
